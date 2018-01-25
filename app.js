@@ -25,6 +25,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 
+app.use(function(request, response, next){
+    response.header("Access-Control-Allow-Origin", "*");
+    response.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token");
+    next();
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
